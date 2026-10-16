@@ -1,70 +1,12 @@
-<!doctype html>
-<html lang="my">
-<head>
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-  <meta name="theme-color" content="#120b0d">
-  <meta name="description" content="BaiYuchen Royal Hub — notes, learning, poetry and creative ideas.">
-  <title>CROWN-2510 | BaiYuchen Royal Hub</title>
-  <link rel="manifest" href="manifest.json">
-  <link rel="stylesheet" href="style.css">
-</head>
-<body>
-  <header class="topbar">
-    <div class="crown" aria-hidden="true">♛</div>
-    <div><p class="eyebrow">CROWN-2510</p><h1>BaiYuchen <span>Royal Hub</span></h1></div>
-  </header>
-  <main>
-    <section class="hero" id="top">
-      <p class="eyebrow">WELCOME TO YOUR KINGDOM</p>
-      <h2>စိတ်ကူးတွေကို<br><span>လက်တွေ့ဖန်တီးပါ။</span></h2>
-      <p class="muted">သင်ယူပါ · ရေးသားပါ · ဖန်တီးပါ</p>
-      <div class="hero-mark">BYC <span>✦</span></div>
-    </section>
-    <section class="section">
-      <div class="section-heading"><div><p class="eyebrow">YOUR SPACE</p><h2>အမြန်ဝင်ရန်</h2></div></div>
-      <div class="tiles">
-        <button class="tile" data-target="notes"><span class="tile-icon">✎</span><strong>မှတ်စုများ</strong><small>အတွေးများကို သိမ်းဆည်းရန်</small></button>
-        <button class="tile" data-target="learn"><span class="tile-icon">⌘</span><strong>AI & နည်းပညာ</strong><small>လေ့လာရေး စာရင်း</small></button>
-        <button class="tile" data-target="creative"><span class="tile-icon">♫</span><strong>သီချင်း & ကဗျာ</strong><small>ဖန်တီးမှု အခန်း</small></button>
-        <button class="tile" data-target="about"><span class="tile-icon">♛</span><strong>ကျွန်ုပ်၏ ရည်မှန်းချက်</strong><small>ရှေ့ဆက်မည့် ခရီး</small></button>
-      </div>
-    </section>
-    <section class="section panel" id="notes">
-      <p class="eyebrow">SAVED ON THIS DEVICE</p><h2>📝 ကိုယ်ပိုင်မှတ်စု</h2>
-      <p class="muted">မှတ်စုကို ဒီဖုန်းရဲ့ Browser ထဲမှာပဲ သိမ်းထားပါမယ်။</p>
-      <textarea id="noteInput" rows="5" placeholder="ဒီနေ့ သင်ယူချင်တာ၊ စိတ်ကူး၊ ရည်မှန်းချက်..."></textarea>
-      <div class="actions"><button class="primary" id="saveNote">မှတ်စုသိမ်းမယ်</button><button class="secondary" id="clearNote">ရှင်းမယ်</button></div>
-      <p id="noteStatus" class="status" aria-live="polite"></p>
-    </section>
-    <section class="section panel" id="learn">
-      <p class="eyebrow">LEARN • BUILD • SHARE</p><h2>💡 AI & နည်းပညာ</h2>
-      <ul class="checklist">
-        <li><label><input type="checkbox"> HTML, CSS, JavaScript အခြေခံ</label></li>
-        <li><label><input type="checkbox"> GitHub နဲ့ Code သိမ်းဆည်းနည်း</label></li>
-        <li><label><input type="checkbox"> Android App တည်ဆောက်မှု</label></li>
-        <li><label><input type="checkbox"> AI API နဲ့ လုံခြုံစွာ ချိတ်ဆက်မှု</label></li>
-      </ul>
-    </section>
-    <section class="section panel" id="creative">
-      <p class="eyebrow">MAKE SOMETHING ORIGINAL</p><h2>🎵 သီချင်း & ကဗျာ</h2>
-      <label for="ideaInput" class="field-label">ဖန်တီးမယ့် စိတ်ကူး</label>
-      <input id="ideaInput" type="text" placeholder="ဥပမာ — Rockstar Rap, အိပ်မက်၊ သိုင်းလောက">
-      <button class="primary full" id="saveIdea">စိတ်ကူးစာရင်းထဲ ထည့်မယ်</button>
-      <ul id="ideaList" class="idea-list"></ul>
-    </section>
-    <section class="section panel" id="about">
-      <p class="eyebrow">CROWN-2510 • VERSION 1.0</p><h2>👑 ကျွန်ုပ်၏ ရည်မှန်းချက်</h2>
-      <p>နည်းပညာကို လေ့လာမယ်။ ကိုယ်ပိုင် App နဲ့ ဂိမ်းတွေ ဖန်တီးမယ်။ သီချင်း၊ ကဗျာနဲ့ စိတ်ကူးတွေကို ကမ္ဘာနဲ့ မျှဝေမယ်။</p>
-      <p class="muted">တစ်ဆင့်ချင်း တည်ဆောက်ပါ။ နေ့တိုင်း တိုးတက်ပါ။</p>
-    </section>
-  </main>
-  <nav class="bottom-nav" aria-label="အဓိကမီနူး">
-    <button data-target="top" class="nav-item active"><span>⌂</span>မူလ</button>
-    <button data-target="notes" class="nav-item"><span>✎</span>မှတ်စု</button>
-    <button data-target="learn" class="nav-item"><span>⌘</span>လေ့လာ</button>
-    <button data-target="creative" class="nav-item"><span>♫</span>ဖန်တီး</button>
-  </nav>
-  <script src="app.js"></script>
-</body>
-</html>
+<!doctype html><html lang="my"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover"><meta name="theme-color" content="#120b0d"><title>CROWN-2510 | BaiYuchen Royal Hub</title><link rel="manifest" href="manifest.json"><link rel="stylesheet" href="style.css"></head><body>
+<header class="topbar"><div class="crown">♛</div><div><p class="eyebrow">CROWN-2510</p><h1>BaiYuchen <span>Royal Hub</span></h1></div></header><main>
+<section class="hero" id="top"><p class="eyebrow">WELCOME TO YOUR KINGDOM</p><h2>စိတ်ကူးတွေကို<br><span>လက်တွေ့ဖန်တီးပါ။</span></h2><p class="muted">သင်ယူပါ · ရေးသားပါ · ဖန်တီးပါ</p><div class="hero-mark">BYC ✦</div></section>
+<section class="section"><p class="eyebrow">YOUR SPACE</p><h2>အမြန်ဝင်ရန်</h2><div class="tiles"><button class="tile" data-target="notes">✎<strong>မှတ်စုများ</strong></button><button class="tile" data-target="learn">⌘<strong>AI & နည်းပညာ</strong><small>သင်ခန်းစာဖတ်ရန်</small></button><button class="tile" data-target="creative">📚<strong>Novel၊ စာပေ၊ ကဗျာ၊ သီချင်း</strong></button><button class="tile" data-target="royal-store">♛<strong>Coin Shop</strong></button></div></section>
+<section class="section panel" id="wallet"><p class="eyebrow">ROYAL REWARDS</p><h2>🪙 Coin Wallet</h2><p class="wallet"><b id="coinBalance">20</b> Coins</p><p class="muted">Coin သည် ဒီ Browser ထဲက ဂိမ်းအမှတ်ဖြစ်ပြီး ငွေသားမဟုတ်ပါ။</p></section>
+<section class="section panel" id="notes"><h2>📝 ကိုယ်ပိုင်မှတ်စု</h2><textarea id="noteInput" rows="5" placeholder="စိတ်ကူးနဲ့ ရည်မှန်းချက်ရေးပါ..."></textarea><div class="actions"><button class="primary" id="saveNote">သိမ်းမယ်</button><button class="secondary" id="clearNote">ရှင်းမယ်</button></div><p id="noteStatus" class="status"></p></section>
+<section class="section panel" id="learn"><p class="eyebrow">LEARN • BUILD • SHARE</p><h2>💡 AI & နည်းပညာစာကြည့်တိုက်</h2><p class="muted">ခေါင်းစဉ်ကိုနှိပ်ပြီး သင်ခန်းစာဖတ်ပါ။</p><div class="lesson-buttons"><button data-lesson="html">🌐 HTML</button><button data-lesson="css">🎨 CSS</button><button data-lesson="js">⚙️ JavaScript</button><button data-lesson="github">🐙 GitHub</button><button data-lesson="android">📱 Android App</button><button data-lesson="ai">🤖 AI & API</button></div><article id="lessonReader" class="reader"><h3>သင်ခန်းစာရွေးပါ</h3><p>အပေါ်က ခေါင်းစဉ်ကိုနှိပ်ပါ။</p></article></section>
+<section class="section panel" id="creative"><p class="eyebrow">MAKE SOMETHING ORIGINAL</p><h2>✍️ စာပေဖန်တီးရေးခန်း</h2><label class="field-label" for="writingType">အမျိုးအစား</label><select id="writingType"><option value="Novel / ဝတ္ထု">Novel / အခန်းဆက်ဝတ္ထု</option><option value="စာပေ / ဆောင်းပါး">စာပေ / ဆောင်းပါး</option><option value="ကဗျာ">ကဗျာ</option><option value="သီချင်းစာသား">သီချင်းစာသား</option></select><label class="field-label" for="writingTitle">ခေါင်းစဉ်</label><input id="writingTitle" placeholder="စာမူခေါင်းစဉ်"><label class="field-label" for="writingBody">စာသား</label><textarea id="writingBody" rows="7" placeholder="ဒီမှာရေးသားပါ..."></textarea><div class="actions"><button class="primary" id="saveWriting">စာမူသိမ်းမယ်</button><button class="secondary" id="clearWriting">ရှင်းမယ်</button></div><p id="writingStatus" class="status"></p><h3>📚 ကိုယ်ပိုင်စာမူများ</h3><div id="writingList" class="saved-list"></div></section>
+<section class="section panel" id="lucky-wheel"><p class="eyebrow">SPIN • WIN • CREATE</p><h2>🎡 Lucky Wheel</h2><p class="muted">တစ်နေ့တစ်ကြိမ် အခမဲ့လှည့်ပြီး Coin ရယူပါ။</p><div class="wheel-wrap"><div class="pointer">▼</div><div id="wheelVisual" class="wheel">♛</div></div><button class="primary full" id="spinWheel">🎡 လှည့်မယ်</button><p id="wheelStatus" class="status"></p><p id="lastSpin" class="muted"></p></section>
+<section class="section panel" id="royal-store"><p class="eyebrow">ROYAL LIBRARY</p><h2>🛍️ Coin နဲ့ စာပေဝယ်ရန်</h2><div id="storeList" class="store-list"></div><h3>🔓 ဝယ်ယူထားသောစာပေ</h3><div id="ownedList" class="saved-list"></div><article id="contentReader" class="reader"><h3>စာပေကို ဖွင့်ပါ</h3><p>ဝယ်ထားသောစာမူကို ဒီမှာဖတ်နိုင်ပါတယ်။</p></article></section>
+<section class="section panel" id="about"><p class="eyebrow">CROWN-2510 • VERSION 2.0</p><h2>👑 ရည်မှန်းချက်</h2><p>AI နည်းပညာသင်ယူမယ်။ Novel၊ စာပေ၊ ကဗျာနဲ့ သီချင်းတွေ ဖန်တီးမယ်။</p></section></main>
+<nav class="bottom-nav"><button class="nav-item active" data-target="top">⌂<small>မူလ</small></button><button class="nav-item" data-target="learn">⌘<small>လေ့လာ</small></button><button class="nav-item" data-target="creative">✎<small>စာပေ</small></button><button class="nav-item" data-target="lucky-wheel">🎡<small>ကံစမ်း</small></button></nav><script src="app.js"></script></body></html>

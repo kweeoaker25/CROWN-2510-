@@ -1,33 +1,26 @@
-const $ = (id) => document.getElementById(id);
-const NOTE_KEY = "crown2510-note";
-const IDEA_KEY = "crown2510-ideas";
-const safeRead = (key, fallback) => { try { const v = localStorage.getItem(key); return v ? JSON.parse(v) : fallback; } catch { return fallback; } };
-function setStatus(message) { $("noteStatus").textContent = message; }
-$("noteInput").value = localStorage.getItem(NOTE_KEY) || "";
-$("saveNote").addEventListener("click", () => { localStorage.setItem(NOTE_KEY, $("noteInput").value); setStatus("✓ မှတ်စုကို ဒီဖုန်းမှာ သိမ်းပြီးပါပြီ။"); });
-$("clearNote").addEventListener("click", () => { $("noteInput").value = ""; localStorage.removeItem(NOTE_KEY); setStatus("မှတ်စုကို ရှင်းလိုက်ပါပြီ။"); });
-let ideas = safeRead(IDEA_KEY, []);
-function renderIdeas() {
-  const list = $("ideaList"); list.replaceChildren();
-  ideas.forEach((idea, index) => {
-    const li = document.createElement("li"); li.append(document.createTextNode(idea + " "));
-    const remove = document.createElement("button"); remove.type = "button"; remove.className = "secondary"; remove.textContent = "ဖျက်"; remove.setAttribute("aria-label", idea + " ကို ဖျက်ရန်");
-    remove.addEventListener("click", () => { ideas.splice(index, 1); localStorage.setItem(IDEA_KEY, JSON.stringify(ideas)); renderIdeas(); });
-    li.append(remove); list.append(li);
-  });
-}
-$("saveIdea").addEventListener("click", () => {
-  const value = $("ideaInput").value.trim();
-  if (!value) { $("ideaInput").focus(); return; }
-  ideas.unshift(value); localStorage.setItem(IDEA_KEY, JSON.stringify(ideas)); $("ideaInput").value = ""; renderIdeas();
-});
-document.querySelectorAll("[data-target]").forEach(button => button.addEventListener("click", () => {
-  const target = button.dataset.target;
-  if (target === "top") { window.scrollTo({top: 0, behavior: "smooth"}); }
-  else { const section = $(target); if (section) section.scrollIntoView({behavior:"smooth", block:"start"}); }
-  document.querySelectorAll(".nav-item").forEach(item => item.classList.toggle("active", item.dataset.target === target));
-}));
-renderIdeas();
-if ("serviceWorker" in navigator && location.protocol.startsWith("http")) {
-  window.addEventListener("load", () => navigator.serviceWorker.register("./sw.js").catch(() => {}));
-}
+const $=id=>document.getElementById(id), read=(k,d)=>{try{let v=localStorage.getItem(k);return v===null?d:JSON.parse(v)}catch{return d}},save=(k,v)=>localStorage.setItem(k,JSON.stringify(v)),esc=s=>String(s).replace(/[&<>"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c])),today=()=>new Date().toLocaleDateString('en-CA');
+let coins=Number(read('crown-coins',20)),owned=read('crown-owned',[]),writings=read('crown-writings',[]);const status=(id,s)=>$(id).textContent=s;
+function wallet(){ $('coinBalance').textContent=coins;save('crown-coins',coins); }
+$('noteInput').value=localStorage.getItem('crown-note')||'';$('saveNote').onclick=()=>{localStorage.setItem('crown-note',$('noteInput').value);status('noteStatus','✓ မှတ်စုသိမ်းပြီးပါပြီ။')};$('clearNote').onclick=()=>{$('noteInput').value='';localStorage.removeItem('crown-note');status('noteStatus','မှတ်စုရှင်းပြီးပါပြီ။')};
+const lessons={
+html:['HTML အခြေခံ','HTML က ဝဘ်စာမျက်နှာရဲ့ ဖွဲ့စည်းပုံကို တည်ဆောက်ပေးပါတယ်။ ခေါင်းစဉ်၊ စာပိုဒ်နဲ့ ခလုတ်တွေကို tag များနဲ့ ရေးပါတယ်.','<h1>မင်္ဂလာပါ</h1>\\n<p>ကျွန်ုပ်၏ ပထမဆုံးစာမျက်နှာ</p>','h1 နဲ့ p တစ်ခုစီရေးကြည့်ပါ။'],
+css:['CSS ဒီဇိုင်း','CSS က အရောင်၊ အရွယ်အစား၊ အကွာအဝေးနဲ့ layout ကို ပြင်ဆင်ပေးပါတယ်.','body { background: #100b0d; color: white; }\\nbutton { border-radius: 12px; }','ခလုတ်ရဲ့ အရောင်နဲ့ ထောင့်ကို ပြောင်းကြည့်ပါ။'],
+js:['JavaScript','JavaScript က ခလုတ်နှိပ်ခြင်း၊ စာရင်းပြောင်းခြင်းနဲ့ သိမ်းဆည်းခြင်းလို လုပ်ဆောင်ချက်တွေကို အသက်ဝင်စေပါတယ်.','document.querySelector("button").addEventListener("click", () => alert("မင်္ဂလာပါ"));','ခလုတ်နှိပ်လျှင် စာသားပြောင်းအောင် စမ်းပါ။'],
+github:['GitHub & Pages','GitHub က code ကို သိမ်းဆည်းပြီး ပြောင်းလဲမှုမှတ်တမ်းကို ထိန်းပေးပါတယ်။ GitHub Pages က static website ကို online တင်ပေးပါတယ်.','index.html = စာမျက်နှာ\\nstyle.css = ဒီဇိုင်း\\napp.js = လုပ်ဆောင်ချက်','ဖိုင်ပြင်ပြီး Commit လုပ်ကာ live site ကိုစစ်ပါ။'],
+android:['Android App','HTML app ကို Capacitor နဲ့ Android project ထဲထည့်ပြီး APK အဖြစ် build လုပ်နိုင်ပါတယ်.','Web files → Capacitor → Android build → APK','GitHub Actions ရဲ့ Build log နဲ့ Artifacts ကိုစစ်ပါ။'],
+ai:['AI & API လုံခြုံရေး','AI API က app ကို AI ဝန်ဆောင်မှုနဲ့ ချိတ်ပေးပါတယ်။ API key ကို browser JavaScript ထဲမထည့်ပါနဲ့။ Server-side backend ကိုသုံးပါ.','App → ကိုယ်ပိုင် backend → AI API','API key ကို public repository ထဲမတင်ရတဲ့အကြောင်း မှတ်စုရေးပါ။']};
+document.querySelectorAll('[data-lesson]').forEach(b=>b.onclick=()=>{let l=lessons[b.dataset.lesson];$('lessonReader').innerHTML=`<h3>${esc(l[0])}</h3><p>${esc(l[1])}</p><pre>${esc(l[2])}</pre><p><b>လေ့ကျင့်ခန်း:</b> ${esc(l[3])}</p>`});
+function renderWritings(){let el=$('writingList');el.innerHTML='';if(!writings.length){el.innerHTML='<p class="muted">စာမူမရှိသေးပါ။</p>';return}writings.forEach((w,i)=>{let d=document.createElement('div');d.className='saved-item';d.innerHTML=`<h3>${esc(w.title)}</h3><p>${esc(w.type)} · ${esc(w.body.slice(0,130))}</p>`;let open=document.createElement('button');open.className='secondary';open.textContent='ပြန်ဖတ် / ပြင်';open.onclick=()=>{$('writingType').value=w.type;$('writingTitle').value=w.title;$('writingBody').value=w.body};let del=document.createElement('button');del.className='secondary';del.textContent='ဖျက်';del.onclick=()=>{writings.splice(i,1);save('crown-writings',writings);renderWritings()};d.append(open,del);el.append(d)})}
+$('saveWriting').onclick=()=>{let title=$('writingTitle').value.trim(),body=$('writingBody').value.trim();if(!title||!body){status('writingStatus','ခေါင်းစဉ်နဲ့ စာသား ဖြည့်ပေးပါ။');return}writings.unshift({title,body,type:$('writingType').value});save('crown-writings',writings);renderWritings();$('writingTitle').value='';$('writingBody').value='';status('writingStatus','✓ စာမူသိမ်းပြီးပါပြီ။')};$('clearWriting').onclick=()=>{$('writingTitle').value='';$('writingBody').value='';status('writingStatus','စာရေးရန်နေရာ ရှင်းပြီးပါပြီ။')};
+const prizes=[5,10,15,20,30,50];function spinState(){let last=read('crown-spin','');$('lastSpin').textContent=last?'နောက်ဆုံးကံစမ်းချိန်: '+last:'ဒီနေ့ မကံစမ်းရသေးပါ။';$('spinWheel').disabled=last===today();$('spinWheel').textContent=last===today()?'✓ ဒီနေ့ ကံစမ်းပြီးပါပြီ':'🎡 လှည့်မယ်'}
+$('spinWheel').onclick=()=>{if(read('crown-spin','')===today()){status('wheelStatus','မနက်ဖြန် ပြန်လာခဲ့ပါ။');return}let p=prizes[Math.floor(Math.random()*prizes.length)],w=$('wheelVisual');$('spinWheel').disabled=true;w.classList.remove('spinning');void w.offsetWidth;w.classList.add('spinning');setTimeout(()=>{coins+=p;save('crown-spin',today());wallet();status('wheelStatus',`🎉 ${p} Coins ရရှိပါပြီ။`);spinState()},1450)};
+const items=[
+{id:'novel1',title:'နဂါးဧကရာဇ် — အခန်း ၁',type:'ဝတ္ထု',price:10,desc:'သိုင်းလောကနဲ့ လျှို့ဝှက်နဂါးမျိုးဆက်',body:'အခန်း ၁ — မိုးကြိုးအောက်က ကတိ\\n\\nညကောင်းကင်ကို မိုးကြိုးတစ်ချက် ဖြတ်သန်းသွားချိန် Bai Yunchen သည် တောင်ထိပ်ပေါ်တွင် မျက်လုံးဖွင့်လာသည်။ လက်ဖဝါးထဲက ရွှေရောင်အမှတ်အသားသည် နဂါးမျိုးဆက်၏ လျှို့ဝှက်သင်္ကေတဖြစ်ကြောင်း သူမသိသေး။\\n\\n“ကောင်းကင်က ငါ့လမ်းကို ပိတ်ထားရင် ငါကိုယ်တိုင် လမ်းဖောက်မယ်။”'},
+{id:'poem1',title:'လမင်းအောက်က ကတိ',type:'ကဗျာ',price:5,desc:'အိပ်မက်နဲ့ မျှော်လင့်ချက်အကြောင်း',body:'လမင်းအောက်က ကတိ\\n\\nညအမှောင် ဘယ်လောက်နက်နက်\\nကြယ်တစ်ပွင့်တော့ လင်းနေမယ်။\\nလမ်းခရီး ဘယ်လောက်ဝေးဝေး\\nခြေလှမ်းတစ်လှမ်းက စတင်မယ်။\\nအိပ်မက်ကို လက်မလွှတ်နဲ့\\nမနက်ဖြန်က ကိုယ့်လက်ထဲ။'},
+{id:'song1',title:'Royal King — Rap Hook',type:'သီချင်း',price:8,desc:'Royal King နမူနာ Rap',body:'Crown on my head, fire in my soul,\\nBaiYuchen rising, I’m taking control.\\nLashio roots with the Yangon flow,\\nStep by step, watch the whole world know.\\n\\nမြန်မာ့နှလုံးသား၊ အိပ်မက်က အမြင့်ဆုံး\\nအရှုံးတွေကြားထဲက ငါပြန်ထမယ် အခိုင်ဆုံး။'},
+{id:'essay1',title:'AI ကို စတင်လေ့လာခြင်း',type:'စာပေ',price:12,desc:'AI ဆိုတာဘာလဲ၊ ဘယ်လိုလေ့လာမလဲ',body:'AI ကို စတင်လေ့လာခြင်း\\n\\nArtificial Intelligence (AI) သည် ဘာသာစကားနားလည်ခြင်း၊ ပုံစံခွဲခြားခြင်းနှင့် အကြံပြုခြင်းကဲ့သို့ အလုပ်များကို ကွန်ပျူတာက လုပ်ဆောင်နိုင်စေရန် ဖန်တီးထားသော နည်းပညာဖြစ်သည်။ AI ကို သင်ယူရာတွင် မေးခွန်းကောင်းမေးခြင်း၊ အဖြေကို စစ်ဆေးခြင်းနှင့် ကိုယ်ပိုင်စိတ်ကူးဖြင့် အသုံးချခြင်းတို့ အရေးကြီးသည်။'}];
+function openItem(it){$('contentReader').innerHTML=`<h3>${esc(it.title)}</h3><p class="muted">${esc(it.type)}</p><p>${esc(it.body).replace(/\\n/g,'<br>')}</p>`;$('contentReader').scrollIntoView({behavior:'smooth',block:'center'})}
+function renderStore(){$('storeList').innerHTML='';items.forEach(it=>{let d=document.createElement('div');d.className='store-item';d.innerHTML=`<h3>${esc(it.title)}</h3><p>${esc(it.type)} · ${esc(it.desc)}</p><p class="price">🪙 ${it.price} Coins</p>`;let b=document.createElement('button');b.className=owned.includes(it.id)?'secondary':'primary';b.textContent=owned.includes(it.id)?'ဖတ်ရန် ဖွင့်မယ်':'Coin နဲ့ ဝယ်မယ်';b.onclick=()=>{if(owned.includes(it.id)){openItem(it);return}if(coins<it.price){status('wheelStatus',`Coin မလုံလောက်ပါ။ ${it.price} Coins လိုပါတယ်။`);$('lucky-wheel').scrollIntoView({behavior:'smooth'});return}coins-=it.price;owned.push(it.id);save('crown-owned',owned);wallet();renderStore();openItem(it)};d.append(b);$('storeList').append(d)});$('ownedList').innerHTML='';items.filter(it=>owned.includes(it.id)).forEach(it=>{let d=document.createElement('div');d.className='saved-item';d.innerHTML=`<h3>${esc(it.title)}</h3>`;let b=document.createElement('button');b.className='secondary';b.textContent='ဖတ်ရန်';b.onclick=()=>openItem(it);d.append(b);$('ownedList').append(d)});if(!owned.length)$('ownedList').innerHTML='<p class="muted">ဝယ်ယူထားသော စာပေ မရှိသေးပါ။</p>'}
+document.querySelectorAll('[data-target]').forEach(b=>b.onclick=()=>{let id=b.dataset.target;if(id==='top')window.scrollTo({top:0,behavior:'smooth'});else $(id).scrollIntoView({behavior:'smooth'});document.querySelectorAll('.nav-item').forEach(n=>n.classList.toggle('active',n.dataset.target===id))});
+wallet();renderWritings();renderStore();spinState();
+if('serviceWorker'in navigator&&location.protocol.startsWith('http'))addEventListener('load',()=>navigator.serviceWorker.register('./sw.js').catch(()=>{}));
