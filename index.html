@@ -1,0 +1,70 @@
+<!doctype html>
+<html lang="my">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <meta name="theme-color" content="#120b0d">
+  <meta name="description" content="BaiYuchen Royal Hub — notes, learning, poetry and creative ideas.">
+  <title>CROWN-2510 | BaiYuchen Royal Hub</title>
+  <link rel="manifest" href="manifest.json">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <header class="topbar">
+    <div class="crown" aria-hidden="true">♛</div>
+    <div><p class="eyebrow">CROWN-2510</p><h1>BaiYuchen <span>Royal Hub</span></h1></div>
+  </header>
+  <main>
+    <section class="hero" id="top">
+      <p class="eyebrow">WELCOME TO YOUR KINGDOM</p>
+      <h2>စိတ်ကူးတွေကို<br><span>လက်တွေ့ဖန်တီးပါ။</span></h2>
+      <p class="muted">သင်ယူပါ · ရေးသားပါ · ဖန်တီးပါ</p>
+      <div class="hero-mark">BYC <span>✦</span></div>
+    </section>
+    <section class="section">
+      <div class="section-heading"><div><p class="eyebrow">YOUR SPACE</p><h2>အမြန်ဝင်ရန်</h2></div></div>
+      <div class="tiles">
+        <button class="tile" data-target="notes"><span class="tile-icon">✎</span><strong>မှတ်စုများ</strong><small>အတွေးများကို သိမ်းဆည်းရန်</small></button>
+        <button class="tile" data-target="learn"><span class="tile-icon">⌘</span><strong>AI & နည်းပညာ</strong><small>လေ့လာရေး စာရင်း</small></button>
+        <button class="tile" data-target="creative"><span class="tile-icon">♫</span><strong>သီချင်း & ကဗျာ</strong><small>ဖန်တီးမှု အခန်း</small></button>
+        <button class="tile" data-target="about"><span class="tile-icon">♛</span><strong>ကျွန်ုပ်၏ ရည်မှန်းချက်</strong><small>ရှေ့ဆက်မည့် ခရီး</small></button>
+      </div>
+    </section>
+    <section class="section panel" id="notes">
+      <p class="eyebrow">SAVED ON THIS DEVICE</p><h2>📝 ကိုယ်ပိုင်မှတ်စု</h2>
+      <p class="muted">မှတ်စုကို ဒီဖုန်းရဲ့ Browser ထဲမှာပဲ သိမ်းထားပါမယ်။</p>
+      <textarea id="noteInput" rows="5" placeholder="ဒီနေ့ သင်ယူချင်တာ၊ စိတ်ကူး၊ ရည်မှန်းချက်..."></textarea>
+      <div class="actions"><button class="primary" id="saveNote">မှတ်စုသိမ်းမယ်</button><button class="secondary" id="clearNote">ရှင်းမယ်</button></div>
+      <p id="noteStatus" class="status" aria-live="polite"></p>
+    </section>
+    <section class="section panel" id="learn">
+      <p class="eyebrow">LEARN • BUILD • SHARE</p><h2>💡 AI & နည်းပညာ</h2>
+      <ul class="checklist">
+        <li><label><input type="checkbox"> HTML, CSS, JavaScript အခြေခံ</label></li>
+        <li><label><input type="checkbox"> GitHub နဲ့ Code သိမ်းဆည်းနည်း</label></li>
+        <li><label><input type="checkbox"> Android App တည်ဆောက်မှု</label></li>
+        <li><label><input type="checkbox"> AI API နဲ့ လုံခြုံစွာ ချိတ်ဆက်မှု</label></li>
+      </ul>
+    </section>
+    <section class="section panel" id="creative">
+      <p class="eyebrow">MAKE SOMETHING ORIGINAL</p><h2>🎵 သီချင်း & ကဗျာ</h2>
+      <label for="ideaInput" class="field-label">ဖန်တီးမယ့် စိတ်ကူး</label>
+      <input id="ideaInput" type="text" placeholder="ဥပမာ — Rockstar Rap, အိပ်မက်၊ သိုင်းလောက">
+      <button class="primary full" id="saveIdea">စိတ်ကူးစာရင်းထဲ ထည့်မယ်</button>
+      <ul id="ideaList" class="idea-list"></ul>
+    </section>
+    <section class="section panel" id="about">
+      <p class="eyebrow">CROWN-2510 • VERSION 1.0</p><h2>👑 ကျွန်ုပ်၏ ရည်မှန်းချက်</h2>
+      <p>နည်းပညာကို လေ့လာမယ်။ ကိုယ်ပိုင် App နဲ့ ဂိမ်းတွေ ဖန်တီးမယ်။ သီချင်း၊ ကဗျာနဲ့ စိတ်ကူးတွေကို ကမ္ဘာနဲ့ မျှဝေမယ်။</p>
+      <p class="muted">တစ်ဆင့်ချင်း တည်ဆောက်ပါ။ နေ့တိုင်း တိုးတက်ပါ။</p>
+    </section>
+  </main>
+  <nav class="bottom-nav" aria-label="အဓိကမီနူး">
+    <button data-target="top" class="nav-item active"><span>⌂</span>မူလ</button>
+    <button data-target="notes" class="nav-item"><span>✎</span>မှတ်စု</button>
+    <button data-target="learn" class="nav-item"><span>⌘</span>လေ့လာ</button>
+    <button data-target="creative" class="nav-item"><span>♫</span>ဖန်တီး</button>
+  </nav>
+  <script src="app.js"></script>
+</body>
+</html>

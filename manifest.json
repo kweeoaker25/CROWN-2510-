@@ -1,0 +1,13 @@
+{
+  "id": "./",
+  "name": "CROWN-2510 | BaiYuchen Royal Hub",
+  "short_name": "Royal Hub",
+  "description": "BaiYuchen's personal space for notes, learning and creative ideas.",
+  "lang": "my",
+  "start_url": "./",
+  "scope": "./",
+  "display": "standalone",
+  "orientation": "portrait",
+  "background_color": "#100b0d",
+  "theme_color": "#120b0d"
+}
